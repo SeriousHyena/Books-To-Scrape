@@ -1,29 +1,30 @@
 import scrapy
-from ..items import Scrape2Item
+from ..items import Scrape3Item
 
 class BookSpider(scrapy.Spider):
-    name = 'scrape2'
+    name = 'scrape3'
     start_urls = ['http://books.toscrape.com/index.html']
 
+    def parse(self, response):
 
-        items = Scrape2Item()
-        all_books = response.css('article.product_pod')
+        # items = Scrape3Item()
+        # all_books = response.css('article.product_pod')
 
-        for book in all_books:
+        # for book in all_books:
            
-            title = book.css('a::text').extract()
-            price = book.css('div.product_price > p.price_color::text').extract()
-            avail = book.css(' p.instock.availability::text').extract()
-            review_text = book.css('article.product_page > p').extract_first()
+        #     title = book.css('a::text').extract()
+        #     price = book.css('div.product_price > p.price_color::text').extract()
+        #     avail = book.css(' p.instock.availability::text').extract()
+        #     review_text = book.css('article.product_page > p').extract_first()
 
-            items['title'] = title
-            items['price'] = price
-            items['avail'] = avail
-            items['review_text'] = review_text
+        #     items['title'] = title
+        #     items['price'] = price
+        #     items['avail'] = avail
+        #     items['review_text'] = review_text
 
-            yield items
+        #     yield items
 
-            all_books = response.css('article.product_pod')
+        all_books = response.css('article.product_pod')
         urls = all_books.css('article.product_pod a::attr(href)').extract()
         for url in urls:
             url = response.urljoin(url)
@@ -37,7 +38,10 @@ class BookSpider(scrapy.Spider):
 
     def parse_details(self, response):
         yield {
-            'review_text': response.css('article.product_page > p').extract_first(),
+            'book_title' : response.css('h1::text').extract_first(),
+            'book_availability' : response.css('td::text')[5].extract(),
+            'book_price' : response.css('p.price_color::text').extract_first(),
+            'review_text': response.css('article.product_page > p::text').extract_first(),
             
         }
 

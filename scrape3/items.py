@@ -9,7 +9,7 @@ import scrapy
 
 
 class Scrape3Item(scrapy.Item):
-    title = scrapy.Field()
-    price = scrapy.Field()
-    avail = scrapy.Field()
+    book_title = scrapy.Field()
+    book_availability = scrapy.Field()
+    book_price = scrapy.Field()
     review_text = scrapy.Field()
