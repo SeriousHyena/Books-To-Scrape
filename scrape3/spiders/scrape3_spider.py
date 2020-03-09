@@ -5,7 +5,6 @@ class BookSpider(scrapy.Spider):
     name = 'scrape2'
     start_urls = ['http://books.toscrape.com/index.html']
 
-    def parse(self, response):
 
         items = Scrape2Item()
         all_books = response.css('article.product_pod')
