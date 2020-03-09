@@ -1,3 +1,6 @@
+# the github repo for project is:
+# https://github.com/SeriousHyena/Books-To-Scrape
+
 import scrapy
 from ..items import Scrape3Item
 
