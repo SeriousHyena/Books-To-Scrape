@@ -7,7 +7,7 @@ class BookSpider(scrapy.Spider):
 
     def parse(self, response):
 
-        # items = Scrape3Item()
+         
         # all_books = response.css('article.product_pod')
 
         # for book in all_books:
@@ -37,13 +37,27 @@ class BookSpider(scrapy.Spider):
             yield scrapy.Request(url=next_page_url, callback=self.parse)
 
     def parse_details(self, response):
-        yield {
-            'book_title' : response.css('h1::text').extract_first(),
-            'book_availability' : response.css('td::text')[5].extract(),
-            'book_price' : response.css('p.price_color::text').extract_first(),
-            'review_text': response.css('article.product_page > p::text').extract_first(),
+        # yield {
+        #     'book_title' : response.css('h1::text').extract_first(),
+        #     'book_availability' : response.css('td::text')[5].extract(),
+        #     'book_price' : response.css('p.price_color::text').extract_first(),
+        #     'review_text': response.css('article.product_page > p::text').extract_first(),
             
-        }
+        # }
+        items = Scrape3Item()
+
+        book_title = response.css('h1::text').extract_first(),
+        book_availability = response.css('td::text')[5].extract(),
+        book_price = response.css('p.price_color::text').extract_first(),
+        review_text = response.css('article.product_page > p::text').extract_first(),
+
+        items['book_title'] = book_title
+        items['book_availability'] = book_availability
+        items['book_price'] = book_price
+        items['review_text'] = review_text
+
+        yield items
+
 
     #follow pagination link
         next_page_url = response.css('li.next > a::attr(href)').extract_first()
