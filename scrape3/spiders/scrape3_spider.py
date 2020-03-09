@@ -21,7 +21,8 @@ class BookSpider(scrapy.Spider):
 
     def parse_details(self, response):
   
-        items = Scrape3Item() # save the page data in the the items containers
+        items = Scrape3Item()   # save the page data in the the items containers. for this part I had to study the structure of the page in order to use the 
+                                # correct selectors-everything is css selectors
 
         book_title = response.css('h1::text').extract_first(),
         book_availability = response.css('td::text')[5].extract(),
