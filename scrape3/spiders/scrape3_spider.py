@@ -1,5 +1,6 @@
 # the github repo for project is:
 # https://github.com/SeriousHyena/Books-To-Scrape
+# local location C:\Users\emack\scrape3
 
 import scrapy
 from ..items import Scrape3Item
