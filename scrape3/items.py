@@ -9,6 +9,7 @@ import scrapy
 
 
 class Scrape3Item(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    title = scrapy.Field()
+    price = scrapy.Field()
+    avail = scrapy.Field()
+    review_text = scrapy.Field()
