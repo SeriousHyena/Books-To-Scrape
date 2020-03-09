@@ -28,6 +28,7 @@ class BookSpider(scrapy.Spider):
                                 # correct selectors-everything is css selectors
 
         book_title = response.css('h1::text').extract_first(),
+        # i have to use absolute indexing for the book_availability selector in order to get the correct piece of data
         book_availability = response.css('td::text')[5].extract(),
         book_price = response.css('p.price_color::text').extract_first(),
         review_text = response.css('article.product_page > p::text').extract_first(),
